@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default function JobLists() {
@@ -21,35 +22,22 @@ export default function JobLists() {
         fetchJobs();
     }, []);
 
-    
     return (
-        <main className="container">
-          <div className="blog-section">
-            <h1>Recent Posts</h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Content</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {jobs.map((job, index) => (
-                  <tr key={index}>
-                    <th>{job.id}</th>
-                    <th>{job.title}</th>
-                    <th>{job.author}</th>
-                    <th>{job.content}</th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <section className="py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6 sm:px-8 md:px-12">
+            <h2 className="text-2xl font-semibold md:text-3xl">Job Postings</h2>
+      
+            <div className="mt-12 grid grid-auto-fit-lg gap-8">
+              {jobs.map((job) => (
+                <div key={job.id} className="grid2-item bg-slate-200 border border-gray-300 p-4 rounded-lg">
+                    <h3>Position: {job.title}</h3>
+                    <p>By: {job.author}</p>
+                    <p>Description: {job.content}</p>
+                    <button className="bg-white rounded-lg py-2 px-4 mt-4">Learn more</button>
+                </div>
+              ))}
+            </div>
           </div>
-        </main>
+        </section>
       );
-    }
-
-    
+}

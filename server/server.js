@@ -35,26 +35,26 @@ app.get('/joblist', (req, res) => {
     });
   });
 
-app.post('/jobadd', (req, res) => {
-    const { id, title, author, content } = req.body;
+  app.post('/jobadd', (req, res) => {
+    const { title, author, content } = req.body;
   
     // Check if required fields are provided
-    if (!id || !title || !author || !content)  {
+    if (!title || !author || !content) {
       res.status(400).json({ error: 'Missing required fields' });
       return;
     }
   
-    const query = 'INSERT INTO jobs VALUES(?, ?, ?, ?)';
-    const values = [id, title, author, content];
+    const query = 'INSERT INTO jobs (title, author, content) VALUES (?, ?, ?)';
+    const values = [title, author, content];
   
     connection.query(query, values, (error, result) => {
       if (error) {
         console.error('Failed to add job to the database:', error);
-        
         res.status(500).json({ error: 'Failed to add job to the database.' });
       } else {
+        const id = result.insertId;
         res.status(201).json({ id, title, author, content });
-        console.log( 'job Blog: ', { id, title, author, content });
+        console.log('Added job to the database:', { id, title, author, content });
       }
     });
   });

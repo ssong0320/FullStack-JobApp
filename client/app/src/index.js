@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Create from './components/Create';
-import Jobs from './components/Jobs';
+import Jobs from './components/Jobs'
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
 const router = createBrowserRouter([
